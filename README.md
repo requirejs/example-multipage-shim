@@ -11,7 +11,7 @@ layer, and the page-specific modules should be in a page-specific layer.
 * **[shim config](http://requirejs.org/docs/api.html#config-shim)** is used to
 load Backbone and underscore.
 
-This project is different from the standard
+This **project is different** from the standard
 [requirejs/example-multipage](https://github.com/requirejs/example-multipage)
 because [shim config](http://requirejs.org/docs/api.html#config-shim)
 is used. Shimmed modules need their dependencies loaded before they are executed.
