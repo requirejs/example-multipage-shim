@@ -19,6 +19,13 @@ It is not as robust as normal modules. Additionally, the common.js file has
 shim config in it. See the js/app/main1.js file for the Backbone and underscore
 use.
 
+Since the shim config requires dependencies to be in the page, instead of
+using `data-main="js/page1"` for page1.html, this example inlines the require
+calls in the HTML page. If data-main was used instead, then 'js/page1' could not
+have any dependencies inlined, and instead still rely on the 'common' and
+'app/main1' build layers to hold the modules, due to the restrictions shim
+config places on the build.
+
 ## Getting this project template
 
 If you are using [volo](https://github.com/volojs/volo):
@@ -47,10 +54,6 @@ This **www** has the following layout:
     * **lib**: the directory to hold third party modules, like jQuery.
     * **common.js**: contains the requirejs config, and it will be the build
     target for the set of common modules.
-    * **page1.js**: used for the data-main for page1.html. Loads the common
-    module, then loads **app/main1**, the main module for page 1.
-    * **page2.js**: used for the data-main for page2.html. Loads the common
-    module, then loads **app/main2**, the main module for page 2.
 
 To optimize, run:
 
@@ -61,16 +64,11 @@ That build command creates an optimized version of the project in a
 modules. **js/app/main1.js** will contain the main1-specific modules,
 **js/app/main2.js** will contain the main2-specific modules.
 
-This means that for page 1, after an optimization, there will be three scripts
+This means that for page 1, after an optimization, there will be two scripts
 loaded:
 
-* js/page1.js
 * js/common.js
 * js/app/main1.js
-
-If shim config was not used, this could be cut down to two requests. See
-[requirejs/example-multipage](https://github.com/requirejs/example-multipage)
-for an example of that setup. But it means not using shim config.
 
 ## Building up the common layer
 
