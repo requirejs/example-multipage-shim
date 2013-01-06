@@ -19,12 +19,24 @@ It is not as robust as normal modules. Additionally, the common.js file has
 shim config in it. See the js/app/main1.js file for the Backbone and underscore
 use.
 
-Since the shim config requires dependencies to be in the page, instead of
-using `data-main="js/page1"` for page1.html, this example inlines the require
-calls in the HTML page. If data-main was used instead, then 'js/page1' could not
-have any dependencies inlined, and instead still rely on the 'common' and
-'app/main1' build layers to hold the modules, due to the restrictions shim
-config places on the build.
+The shim config requires shimmed dependencies to be loaded first, before
+the shimmed script is executed. So instead of using `data-main="js/page1"`
+approach as used in example-multipage, this example inlines the require calls
+in the HTML for the page.
+
+If data-main was used instead, then there would need to be a 'js/page1' that
+would contain the <script> contents in page1.html, but that js/page1.js could
+not be the target of the optimization step, since it would inline the
+'app/main1' dependencies above the require() call for 'js/common'. If 'js/page1'
+used a shimmed script, but the shim dependency was in 'js/common', then the
+shimmed code would execute before the common layer that contains the shim
+dependency loads.
+
+Since 'js/page1' cannot have any other modules inlined in its
+built version, it would add an extra HTTP request to use the 'js/page1' approach.
+By inlining that code in the HTML file, that extra HTTP request is avoided. If
+shim config is not needed, then the setup is simpler, see
+[requirejs/example-multipage](https://github.com/requirejs/example-multipage).
 
 ## Getting this project template
 
