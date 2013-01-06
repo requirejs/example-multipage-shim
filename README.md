@@ -25,7 +25,7 @@ approach as used in example-multipage, this example inlines the require calls
 in the HTML for the page.
 
 If data-main was used instead, then there would need to be a 'js/page1' that
-would contain the <script> contents in page1.html, but that js/page1.js could
+would contain the &lt;scriptgt; contents in page1.html, but that js/page1.js could
 not be the target of the optimization step, since it would inline the
 'app/main1' dependencies above the require() call for 'js/common'. If 'js/page1'
 used a shimmed script, but the shim dependency was in 'js/common', then the
