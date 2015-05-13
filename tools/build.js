@@ -27,7 +27,7 @@
         //shimmed dependencies need to maintain their load order.
         //In this example, common.js will hold jquery, so backbone
         //needs to be delayed from loading until common.js finishes.
-        //That loading sequence is controlled in page1.js.
+        //That loading sequence is controlled in page1.html.
         {
             //module names are relative to baseUrl/paths config
             name: 'app/main1',
