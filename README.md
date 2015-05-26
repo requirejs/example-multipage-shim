@@ -21,13 +21,13 @@ use.
 
 The shim config requires shimmed dependencies to be loaded first, before
 the shimmed script is executed. So instead of using `data-main="js/page1"`
-approach as used in example-multipage, this example inlines the require calls
+approach as used in example-multipage, this example inlines the requirejs calls
 in the HTML for the page.
 
 If data-main was used instead, then there would need to be a 'js/page1' that
 would contain the &lt;script&gt; contents in page1.html, but that js/page1.js could
 not be the target of the optimization step, since it would inline the
-'app/main1' dependencies above the require() call for 'js/common'. If 'js/page1'
+'app/main1' dependencies above the requirejs() call for 'js/common'. If 'js/page1'
 used a shimmed script, but the shim dependency was in 'js/common', then the
 shimmed code would execute before the common layer that contains the shim
 dependency loads.
@@ -88,12 +88,12 @@ As you do builds and see in the build output that each page is including the
 same module, add it to common's "include" array in **tools/build.js**.
 
 It is better to add these common modules to the **tools/build.js** config
-instead of doing a require([]) call for them in **js/common.js**. Modules that
+instead of doing a requirejs([]) call for them in **js/common.js**. Modules that
 are not explicitly required at runtime are not executed when added to common.js
 via the include build option. So by using **tools/build.js**, you can include
 common modules that may be in 2-3 pages but not all pages. For pages that do
 not need a particular common module, it will not be executed. If you put in a
-require() call for it in **js/common.js**, then it will always be executed.
+requirejs() call for it in **js/common.js**, then it will always be executed.
 
 ## More info
 
